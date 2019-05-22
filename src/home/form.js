@@ -71,7 +71,6 @@ export default class MainForm extends Component {
       }
 
       keyUp = (event) =>{
-        console.log({keyup:"in key up"});
         if (event.keyCode === 13) {
           event.preventDefault();
           this.img.click();

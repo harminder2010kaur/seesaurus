@@ -41,13 +41,17 @@ export default class Main extends Component{
                              data =  response.data.noun.syn;
                          if(mode === 'meta' && word)
                               data =  [word,word,word,word,word,word];
-                         if(mode === 'verb' && response.data.verb.syn) 
+                         if(mode === 'verb' && response.data.verb.syn){
+                                console.log(response);
                               data = response.data.verb.syn;
+                            }
                         let tempArr = [];
-                        for(let i = 0; i < 6; i ++){
+                        for(let i = 0;i<data.length&&i < 6; i ++){
+                            console.log("pushing nada");
                             tempArr.push(data[i]);
                         }
-                        while(tempArr.length!==6){
+                        while(tempArr.length < 6){
+                            console.log({total:'nada'});
                             tempArr.push('nada');
                         }
                         this.setState({treasure:tempArr});
@@ -55,7 +59,7 @@ export default class Main extends Component{
                     .catch(error => {
                         console.log(`Oops there is some technical glitch please refer error: ${error}`);
                         let tempArr = [];
-                        while(tempArr.length!==6){
+                        while(tempArr.length < 6){
                             tempArr.push('nada');
                         }
                         this.setState({treasure:tempArr});
@@ -103,7 +107,7 @@ export default class Main extends Component{
 
     componentDidMount(){
         // this.setState({state:this.state});
-        console.log(this.audio);
+        // console.log(this.audio);
     }
     render()
     {
@@ -124,8 +128,8 @@ export default class Main extends Component{
         }
         if(mode === 'verb'){
             bg =bg8;
-            hdbg = bg2;
-            cl = 'red';
+            hdbg = bg8;
+            cl = 'black';
         }
         let styles_body = {
                backgroundImage: `url(${bg})`,
@@ -161,7 +165,7 @@ export default class Main extends Component{
             <div className="display">
             {this.state.treasure.map((word,index) => {
                 return (                          
-                     <Images word={word}/>                                
+                     <Images key={index} word={word}/>                                
                 )
             }
             )}
