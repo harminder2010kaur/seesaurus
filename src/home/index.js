@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import MainForm from './form';
+import Button from './button';
 import './styles/style.scss';
 import Images from './images';
 import yoshi from '../assets/SFX/yoshi.mp3'
@@ -105,6 +106,17 @@ export default class Main extends Component{
             return term;
     }
 
+    btnHandler = (x)=>{
+        console.log({handler:this.audio});
+        if(x){
+            this.audio.play();
+        }
+        else{
+            this.audio.pause();
+        }
+        
+    }
+
     componentDidMount(){
         // this.setState({state:this.state});
         // console.log(this.audio);
@@ -153,11 +165,14 @@ export default class Main extends Component{
         let styles_top = {
             backgroundImage: `url(${hdbg})`
         }
+
+
         return(
             <div style ={styles_body} className = 'body'>
             {/* <audio autoPlay loop><source src={src} type="audio/mpeg" />Your browser sucks</audio> */}
             {this.whatToPlay()}
             <div className='top' style = {styles_top}>
+                <Button mode={this.state.mode} handler={this.btnHandler}/>
                 <h1 className="header" style={styles_header}>Seesaurus #</h1>
                 <MainForm submit={this.submit} mode={this.switchMode} />
                 <h2 className="display__header" style={styles_header_ds}>You have searched{this.whatToSearch()}</h2>                                                      
